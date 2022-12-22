@@ -1,0 +1,33 @@
+package register
+
+import (
+	"github.com/gin-gonic/gin"
+	"kkpanuwat/buffaloMemo/orm"
+	"net/http"
+)
+
+// Person represents a person with a name and age
+
+type RegisterBody struct {
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
+func Register(c *gin.Context) {
+	print(c)
+	var json RegisterBody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	user := orm.User{
+		Username: json.Username,
+		Password: json.Password,
+	}
+
+	orm.Db.Create(&user)
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": json,
+	})
+}
