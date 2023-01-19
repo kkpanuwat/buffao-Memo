@@ -11,4 +11,5 @@ type User struct {
 	Password string
 	Fname string
 	Lname string
+	Email string
 }

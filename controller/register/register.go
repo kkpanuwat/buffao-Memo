@@ -13,6 +13,8 @@ type RegisterBody struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 	Fname    string `json:"fname"`
+	Lname    string `json:"lname"`
+	Email    string `json:"email"`
 }
 
 func Register(c *gin.Context) {
@@ -26,6 +28,8 @@ func Register(c *gin.Context) {
 		Username: json.Username,
 		Password: json.Password,
 		Fname:    json.Fname,
+		Lname:    json.Lname,
+		Email:    json.Email,
 	}
 
 	orm.Db.Create(&user)
