@@ -1,9 +1,10 @@
 package register
 
 import (
-	"github.com/gin-gonic/gin"
 	"kkpanuwat/buffaloMemo/orm"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Person represents a person with a name and age
@@ -11,6 +12,7 @@ import (
 type RegisterBody struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
+	Fname    string `json:"fname"`
 }
 
 func Register(c *gin.Context) {
@@ -23,6 +25,7 @@ func Register(c *gin.Context) {
 	user := orm.User{
 		Username: json.Username,
 		Password: json.Password,
+		Fname:    json.Fname,
 	}
 
 	orm.Db.Create(&user)
