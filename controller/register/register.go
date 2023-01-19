@@ -31,7 +31,7 @@ func Register(c *gin.Context) {
 		Lname:    json.Lname,
 		Email:    json.Email,
 	}
-
+	
 	orm.Db.Create(&user)
 
 	c.JSON(http.StatusOK, gin.H{
